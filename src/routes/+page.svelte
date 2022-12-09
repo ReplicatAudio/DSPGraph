@@ -247,18 +247,22 @@ s > 0 ? 1 : -1;`,
     <div class="modal">
         <button class="modalCloseBtn" on:click={closeModal}>x</button>
         <h3>{ast.modal.type.toUpperCase()}</h3>
-        {#if ast.modal.type === "settings"}
-        <pre style="max-width:100; overflow:scroll;background:var(--bgSub)">
-{JSON.stringify(st, null, 2)}
-        </pre>
-        <Clipboard
-        text={JSON.stringify(st, null, 2)}
-        let:copy
-        on:copy={() => {
-            alert('Has Copied to Clipboard👏');
-        }}>
-        <button on:click={copy}>Copy</button>
-        </Clipboard>
+        {#if ast.modal.type === "app"}
+        <center>
+            <br>
+            © Mathieu Dombrock 2022
+            <br>
+            <Clipboard
+                text={JSON.stringify(st, null, 2)}
+                let:copy
+                on:copy={() => {
+                    alert('Has Copied to Clipboard👏');
+                }}>
+                <button on:click={copy}>Copy State</button>
+            </Clipboard>
+            <a href="https://replicataudio.com" target="_blank" rel="noreferrer"><button>ReplicatAudio</button></a>
+            <a href="https://github.com/ReplicatAudio" target="_blank" rel="noreferrer"><button>Source Code</button></a>
+        </center>
         {/if}
         {#if ast.modal.type === "examples"}
         <center>
@@ -272,11 +276,11 @@ s > 0 ? 1 : -1;`,
     {/if}
     <div class="codeArea">
         <div class="menu">
+            <button class="menuItem" on:click={()=>{showModal("app")}}>App</button>
             <button class="menuItem" on:click={saveToLS}>Save</button>
             <button class="menuItem" on:click={loadFromLS}>Load</button>
             <button class="menuItem" on:click={resetState}>Reset</button>
             <button class="menuItem" on:click={()=>{showModal("examples")}}>Examples</button>
-            <button class="menuItem" on:click={()=>{showModal("settings")}}>Settings</button>
             <button class="menuItem" on:click={()=>{showModal("settings")}}>Help</button>
         </div>
         {#if st.hasErr}
