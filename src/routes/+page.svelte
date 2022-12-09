@@ -272,6 +272,9 @@ s > 0 ? 1 : -1;`,
             {/each}
         </center>
         {/if}
+        {#if ast.modal.type === "help"}
+            <pre>HELP</pre>
+        {/if}
     </div>
     {/if}
     <div class="codeArea">
@@ -281,7 +284,7 @@ s > 0 ? 1 : -1;`,
             <button class="menuItem" on:click={loadFromLS}>Load</button>
             <button class="menuItem" on:click={resetState}>Reset</button>
             <button class="menuItem" on:click={()=>{showModal("examples")}}>Examples</button>
-            <button class="menuItem" on:click={()=>{showModal("settings")}}>Help</button>
+            <button class="menuItem" on:click={()=>{showModal("help")}}>Help</button>
         </div>
         {#if st.hasErr}
         <div class="errMsg">
