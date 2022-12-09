@@ -305,48 +305,50 @@ s > 0 ? 1 : -1;`,
         <Canvas width={640} height={320}>
             <Layer {render} />
         </Canvas>
-        <div class="sliderGroup">
-            <h3>Parameter Controls</h3>
-            {#each st.paramVals as param, i}
-            <div class="sliderWrapper"> 
-                <input type="number" bind:value={param} class="sliderText" min="0" max="1" step="0.01">
-                <br>
-                <input bind:value={param} type="range" min="0" max="1" step="0.001">
-                <div class="tag">p[{i}]</div>
+        <div class="scrollArea">
+            <div class="sliderGroup">
+                <h3>Parameter Controls</h3>
+                {#each st.paramVals as param, i}
+                <div class="sliderWrapper"> 
+                    <input type="number" bind:value={param} class="sliderText" min="0" max="1" step="0.01">
+                    <br>
+                    <input bind:value={param} type="range" min="0" max="1" step="0.001">
+                    <div class="tag">p[{i}]</div>
+                </div>
+                {/each}
             </div>
-            {/each}
-        </div>
-        <div class="sliderGroup">
-            <h3>Global Controls</h3>
-            <div class="sliderWrapper"> 
-                <input type="number" bind:value={st.amplitude} class="sliderText" min="0" max="1" step="0.01">
-                <br>
-                <input bind:value={st.amplitude} type="range" min="-2" max="2" step="0.001">
-                <div class="tag">amplitude</div>
+            <div class="sliderGroup">
+                <h3>Global Controls</h3>
+                <div class="sliderWrapper"> 
+                    <input type="number" bind:value={st.amplitude} class="sliderText" min="0" max="1" step="0.01">
+                    <br>
+                    <input bind:value={st.amplitude} type="range" min="-2" max="2" step="0.001">
+                    <div class="tag">amplitude</div>
+                </div>
+                <div class="sliderWrapper"> 
+                    <input type="number" bind:value={st.periods} class="sliderText" min="1" max="32">
+                    <br>
+                    <input bind:value={st.periods} type="range" min="1" max="32">
+                    <div class="tag">periods</div>
+                </div>
+                <div class="sliderWrapper"> 
+                    <input type="number" bind:value={st.gridSize} class="sliderText" min="1" max="16">
+                    <br>
+                    <input bind:value={st.gridSize} type="range" min="1" max="16">
+                    <div class="tag">grid size</div>
+                </div>
+                <div class="sliderWrapper"> 
+                    <div class="tag">show</div>
+                    <input type=checkbox bind:checked={st.showRefSine}>
+                    <div class="tag">ref sine</div>
+                </div>
+                <div class="sliderWrapper"> 
+                    <div class="tag">show</div>
+                    <input type=checkbox bind:checked={st.showGrid}>
+                    <div class="tag">grid</div>
+                </div>
             </div>
-            <div class="sliderWrapper"> 
-                <input type="number" bind:value={st.periods} class="sliderText" min="1" max="32">
-                <br>
-                <input bind:value={st.periods} type="range" min="1" max="32">
-                <div class="tag">periods</div>
-            </div>
-            <div class="sliderWrapper"> 
-                <input type="number" bind:value={st.gridSize} class="sliderText" min="1" max="16">
-                <br>
-                <input bind:value={st.gridSize} type="range" min="1" max="16">
-                <div class="tag">grid size</div>
-            </div>
-            <div class="sliderWrapper"> 
-                <div class="tag">show</div>
-                <input type=checkbox bind:checked={st.showRefSine}>
-                <div class="tag">ref sine</div>
-            </div>
-            <div class="sliderWrapper"> 
-                <div class="tag">show</div>
-                <input type=checkbox bind:checked={st.showGrid}>
-                <div class="tag">grid</div>
-            </div>
-            
+            <br><br>
         </div>
     </div>
   </body>

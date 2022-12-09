@@ -17,8 +17,10 @@ body{
     color:var(--text);
 }
 canvas{
+    
     display:block;
     margin:0 auto;
+    margin-top:42px;
     border:3px solid rgb(100, 100, 100);
     cursor: not-allowed;
     background:var(--bgSub);
@@ -29,8 +31,10 @@ input[type="number"]{
     color:var(--text);
     cursor:pointer;
 }
-input[type="range"], input[type="checkbox"]{
+input[type="range"], input[type="checkbox"], input[type="number"]{
     cursor:pointer;
+    border:none;
+    outline:none;
 }
 h1, h2, h3{
     color:var(--textHighlight);
@@ -53,9 +57,24 @@ button:hover{
 }
 .headerImg{
     background:var(--bgSub2);
+    position:fixed;
+    top:0;
+    right:0;
+    width:calc(55vw - 8px);
+    text-align: right;
+}
+.headerImg img{
+    height:32px;
+    width:auto; 
 }
 .menu{
     padding:0.25rem;
+    position:fixed;
+    top:0;
+    left:0;
+    height:32px;
+    width:45vw;
+    background:var(--bgSub2);
 }
 .menuItem{
     display:inline-block;
@@ -70,6 +89,10 @@ button:hover{
     color:var(--textHighlight);
     background:var(--bg);
 }
+.scrollArea{
+    max-height:calc(100vh - 384px);
+    overflow-y: scroll;
+}
 .codeArea{
     background:var(--bgSub);
     position:absolute;
@@ -80,15 +103,20 @@ button:hover{
     overflow: scroll;
 }
 .codeArea textarea{
+    position:fixed;
+    top:32px;
     font-family: 'Consolas', monospace;
     background:var(--bgSub);
     color:var(--textCode);
-    width:calc(100% - 2rem);
+    width:calc(45vw - 2rem);
     height:calc(100% - 2rem);
     margin:0 auto;
     padding:1rem;
 }
 .errMsg{
+    position:fixed;
+    bottom:0;
+    z-index:2;
     font-family: 'Consolas', monospace;
     background:var(--warning);
     color:var(--textLight);
