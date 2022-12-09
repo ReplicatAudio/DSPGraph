@@ -1,0 +1,18 @@
+{
+"paramVals": [
+    0.1,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+],
+"periods": 1,
+"amplitude": 0.5,
+"errStr": "",
+"hasErr": false,
+"showRefSine": true,
+"userJS": "s > 0 ? 1 : -1;"
+}
