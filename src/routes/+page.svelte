@@ -297,7 +297,9 @@ s > 0 ? 1 : -1;`,
     </div>
     <div class="plotArea">
         <div class="headerImg">
-            <img src="/ra_logo.png" alt="ReplicatAudio Logo">
+            <a href="https://replicataudio.com" target="_blank" rel="noreferrer">
+                <img src="/ra_logo.png" alt="ReplicatAudio Logo">
+            </a>
         </div>
         <br>
         <Canvas width={640} height={320}>
