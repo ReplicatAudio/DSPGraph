@@ -1,5 +1,5 @@
 <script>
-    import { stLS } from "./storable.js";
+    import { stLS } from "./store.js";
     import {examples} from "../examples";
     const cfg = {
         maxWaves: 4,
