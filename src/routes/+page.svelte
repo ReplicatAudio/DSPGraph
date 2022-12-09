@@ -1,4 +1,5 @@
 <script>
+    import Clipboard from "svelte-clipboard";
     import { stLS } from "./store.js";
     import {examples} from "../examples";
     const cfg = {
@@ -250,6 +251,14 @@ s > 0 ? 1 : -1;`,
         <pre style="max-width:100; overflow:scroll;background:var(--bgSub)">
 {JSON.stringify(st, null, 2)}
         </pre>
+        <Clipboard
+        text={JSON.stringify(st, null, 2)}
+        let:copy
+        on:copy={() => {
+            alert('Has Copied to Clipboard👏');
+        }}>
+        <button on:click={copy}>Copy</button>
+        </Clipboard>
         {/if}
         {#if ast.modal.type === "examples"}
         <center>
