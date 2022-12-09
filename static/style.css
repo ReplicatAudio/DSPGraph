@@ -27,6 +27,10 @@ canvas{
 input[type="number"]{
     background:var(--bg);
     color:var(--text);
+    cursor:pointer;
+}
+input[type="range"], input[type="checkbox"]{
+    cursor:pointer;
 }
 h1, h2, h3{
     color:var(--textHighlight);
