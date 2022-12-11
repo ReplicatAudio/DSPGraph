@@ -14,6 +14,7 @@ tanh() -> Math.tanh()
 round() -> Math.round()
 floor() -> Math.floor()
 ceil() -> Math.ceil()
+sign() -> Math.sign()
 random() -> Math.random()
 noise() -> (Math.random() * 2) - 1`;
 </script>

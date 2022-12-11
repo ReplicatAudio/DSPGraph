@@ -25,6 +25,7 @@
             const round = Math.round;
             const floor = Math.floor;
             const ceil = Math.ceil;
+            const sign = Math.sign;
             const random = Math.random;
             const noise = ()=>{return (Math.random()*2)-1};
 
