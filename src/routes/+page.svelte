@@ -32,7 +32,7 @@
         showRefSine: true,
         showGrid:true,
         gridSize:4,
-        showParams: false,
+        showParams: true,
         showGlobal:false,
         fileName: "MyDSP",
         userJS: defaultJS,
