@@ -26,7 +26,11 @@ canvas{
     background:var(--bgSub);
     /* border-radius: 0.5rem; */
 }
-
+pre{
+    background:var(--bgSub);
+    color:var(--textCode);
+    padding:0.5rem;
+}
 input[type="text"], input[type="file"], input[type="number"], input[type="range"], input[type="checkbox"], input[type="number"]{
     background:var(--bg);
     color:var(--text);
@@ -209,9 +213,14 @@ button:hover{
     top:10vh;
     left:32vw;
     width:calc(100vw - 64vw);
-    min-height: calc(100vh - 40vh);
+    height: calc(100vh - 40vh);
     background:var(--bg2);
     padding:1rem;
+    overflow:hidden;
+}
+.modalScroll{
+    height: 50vh;
+    overflow-y: scroll;
 }
 .modalCloseBtn{
     position:absolute;
