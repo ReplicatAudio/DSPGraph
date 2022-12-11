@@ -1,7 +1,9 @@
 <script>
     import { Canvas, Layer, t } from "svelte-canvas";
+	import { add_styles } from "svelte/internal";
     export let st;
     export let cfg;
+    export let ast;
     // Wave runner
     function wave(x,s,g,p)
     {
@@ -44,6 +46,9 @@
         }
     }
     $: render = ({ context, width, height }) => {
+
+        if(ast.pauseRender){return};
+
         const ctx = context;// cant rename in render func
         const w = 640;
         const h = 320;
@@ -151,7 +156,7 @@
     };
 </script>
 <div>
-    <Canvas width={640} height={320}>
+    <Canvas width={640} height={320} autoclear={false}>
         <Layer {render} />
     </Canvas>
 </div>

@@ -22,6 +22,7 @@
         fileinput: undefined,
         editor: undefined,
         useAce: true,
+        pauseRender: false
     };
     let st = {
         paramVals: [],
@@ -64,7 +65,7 @@
             {
                 st.userJS = ast.editor.getValue();
             }
-        }, 333);
+        }, 500);
 	})
     
     function resizeEditor()
@@ -238,7 +239,7 @@
             </a>
         </div>
         <br>
-        <Plot st={st} cfg={cfg} />
+        <Plot st={st} ast={ast} cfg={cfg} />
         <br>
         <div class="scrollArea">
             
@@ -286,6 +287,11 @@
                     <div class="tag">show</div>
                     <input type=checkbox bind:checked={st.showGrid}>
                     <div class="tag">grid</div>
+                </div>
+                <div class="sliderWrapper"> 
+                    <div class="tag">pause</div>
+                    <input type=checkbox bind:checked={ast.pauseRender}>
+                    <div class="tag">render</div>
                 </div>
                 {/if}
             </div>
