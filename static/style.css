@@ -39,6 +39,10 @@ input[type="text"], input[type="file"], input[type="number"], input[type="range"
     outline:none;
     padding:0.5rem;
 }
+input[type="range"]
+{
+    padding:0;
+}
 input[type="file"]
 {
     display:none;
@@ -190,6 +194,9 @@ button:hover{
     width:calc(128px - 1rem);
     text-align: center;
     /* border-radius: 0.5rem; */
+}
+.sliderWrapper input[type="range"]{
+    width:128px;
 }
 .tag{
     padding:0.25rem;
