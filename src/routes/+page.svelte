@@ -24,6 +24,7 @@
             hScrollBarAlwaysVisible: true,
             vScrollBarAlwaysVisible: true,
         });
+        ast.editor.setValue(st.userJS);
         setInterval(function(){
             st.userJS = ast.editor.getValue()
         }, 333);
@@ -74,6 +75,7 @@ s > 0 ? 1 : -1;`,
         if(confirm("Reset all code and paramters?"))
         {
             st = JSON.parse(JSON.stringify(stb));
+            ast.editor.setValue(st.userJS);
             setup(true);
         }
     }
@@ -92,6 +94,7 @@ s > 0 ? 1 : -1;`,
         if($stLS.periods)
         {
             st = JSON.parse(JSON.stringify($stLS));
+            ast.editor.setValue(st.userJS);
             //if(showAlert){alert('loaded!');};
         }
         else{
@@ -109,6 +112,7 @@ s > 0 ? 1 : -1;`,
     function loadExample(json)
     {
         st = JSON.parse(JSON.stringify(json));
+        ast.editor.setValue(st.userJS);
         closeModal();
     }
     function downloadFile()
@@ -145,14 +149,14 @@ s > 0 ? 1 : -1;`,
         reader.onload = e => {
             try{
                 st = JSON.parse(e.target.result);
+                ast.editor.setValue(st.userJS);
                 alert('Loaded!');
+                closeModal();
             }    
             catch(err){
                 console.log(err);
                 alert('Could not load that file!');
             }
-            
-
         };
     }
     function setup(skipLS=false){
@@ -391,7 +395,7 @@ s > 0 ? 1 : -1;`,
             See the JS Console for more info.
         </div>
         {/if}
-        <div id="editor" bind:this={ast.editor} on:click={resizeEditor}>xxx</div>
+        <div id="editor" bind:this={ast.editor} on:click={resizeEditor}>Loading Editor...</div>
         <!-- <textarea bind:value={st.userJS} id="userJS" spellcheck="false"></textarea> -->
     </div>
     <div class="plotArea">
