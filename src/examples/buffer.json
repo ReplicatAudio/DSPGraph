@@ -1,20 +1,22 @@
 {
-    "paramVals": [
-      0.426,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5
-    ],
-    "periods": 3,
-    "amplitude": 0.5,
-    "errStr": "",
-    "hasErr": false,
-    "showRefSine": true,
-    "showGrid": true,
-    "gridSize": 4,
-    "userJS": "/*\n\nBuffer Example:\n---\nIterate through a buffer\n\n*/\n\nconst b = [0,1,-0.3,0.5,0.2,-0.775,0.33,0.44,0.75];\n\nlet readHead = (x % b.length);\n\nreadHead = floor(readHead);\n\nw[0] = b[readHead];\n\nconst readHeadDemo = p[0];\nw[1] = b[floor(readHeadDemo * (b.length-1))];\n\n"
-  }
+  "paramVals": [
+    0.426,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+  ],
+  "periods": 2,
+  "amplitude": 1,
+  "errStr": "",
+  "hasErr": false,
+  "showRefSine": true,
+  "showGrid": true,
+  "gridSize": 4,
+  "userJS": "/*\n\nBuffer Example:\n---\nIterate through a buffer\n\n*/\n\nconst b = [0,1,-0.3,0.5,0.2,-0.775,0.33,0.44,0.75];\n\nlet readHead = (x % b.length);\n\nreadHead = floor(readHead);\n\nw[0] = b[readHead];\n\nconst readHeadDemo = p[0];\nw[1] = b[floor(readHeadDemo * (b.length-1))];\n\n",
+  "showGlobal": false,
+  "showParams": true
+}

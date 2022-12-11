@@ -1,47 +1,15 @@
 <script>
     import { onMount } from 'svelte'
-	
-	onMount(async () => {
-        ace.config.set('basePath', 'https://cdn.jsdelivr.net/npm/ace-builds@1.13.2/src-noconflict/');
-        ast.editor = ace.edit("editor");
-        // ace.edit(editor, {
-        //     mode: "ace/mode/javascript",
-        //     selectionStyle: "text"
-        // });
-        //ast.editor.setTheme("ace/theme/dracula");
-        //ast.editor.setTheme("ace/theme/one_dark");
-        ast.editor.setTheme("ace/theme/pastel_on_dark");
-        //editor.resize();
-        //editor.setTheme("ace/theme/solarized");
-        ast.editor.session.setMode("ace/mode/javascript");
-        ast.editor.setOptions({
-            selectionStyle: "text",
-            //autoScrollEditorIntoView: true,
-            //copyWithEmptySelection: true,
-            //animatedScroll: false,
-            //showPrintMargin: false,
-            //scrollPastEnd: false,
-            //minLines: 10,
-            //dragEnabled: false,
-            //hScrollBarAlwaysVisible: true,
-            //vScrollBarAlwaysVisible: true,
-        });
-        ast.editor.setValue(st.userJS);
-        setInterval(function(){
-            if(ast.useAce)
-            {
-                st.userJS = ast.editor.getValue();
-            }
-        }, 333);
-	})
-    
-    function resizeEditor()
-    {
-        editor.resize();
-    }
-    import Clipboard from "svelte-clipboard";
-    import { stLS } from "./store.js";
+    import Plot from "../comps/plot.svelte";
+	import ModalApp from '../comps/modalApp.svelte';
+	import ModalExamples from '../comps/modalExamples.svelte';
+	import ModalLoad from '../comps/modalLoad.svelte';
+	import ModalHelp from '../comps/modalHelp.svelte';
+	import ModalSave from '../comps/modalSave.svelte';
+    import { stLS } from "../store.js";
     import {examples} from "../examples";
+    import defaultJS from '../default';
+    
     const cfg = {
         maxWaves: 4,
         paramCount: 8
@@ -67,18 +35,43 @@
         showParams: false,
         showGlobal:false,
         fileName: "MyDSP",
-        userJS: `// Write your JS code here
-// x -> graph x
-// s -> sine (Math.sin(x))
-// p[index] -> param controls (sliders)
-// graph shows last expression 
-// or value of 'w[index]'
-
-// Make a square wave
-s > 0 ? 1 : -1;`,
+        userJS: defaultJS,
     };
     // Create a deep copy of the st object for restoring
     const stb = JSON.parse(JSON.stringify(st));
+
+    onMount(async () => {
+        ace.config.set('basePath', 'https://cdn.jsdelivr.net/npm/ace-builds@1.13.2/src-noconflict/');
+        ast.editor = ace.edit("editor");
+        ast.editor.setTheme("ace/theme/pastel_on_dark");
+        ast.editor.session.setMode("ace/mode/javascript");
+        // https://github.com/ajaxorg/ace/wiki/Configuring-Ace
+        ast.editor.setOptions({
+            selectionStyle: "text",
+            //autoScrollEditorIntoView: true,
+            //copyWithEmptySelection: true,
+            //animatedScroll: false,
+            //showPrintMargin: false,
+            //scrollPastEnd: false,
+            //minLines: 10,
+            //dragEnabled: false,
+            //hScrollBarAlwaysVisible: true,
+            //vScrollBarAlwaysVisible: true,
+        });
+        ast.editor.setValue(st.userJS);
+        setInterval(function(){
+            if(ast.useAce)
+            {
+                st.userJS = ast.editor.getValue();
+            }
+        }, 333);
+	})
+    
+    function resizeEditor()
+    {
+        editor.resize();
+    }
+
     function resetState(){
         if(confirm("Reset all code and paramters?"))
         {
@@ -93,7 +86,7 @@ s > 0 ? 1 : -1;`,
         $stLS = JSON.parse(JSON.stringify(st));
         console.log(JSON.stringify($stLS, null, 2));
     }
-    function loadFromLS(showAlert=true)
+    function loadFromLS()
     {
         if(showAlert)
         {
@@ -103,19 +96,10 @@ s > 0 ? 1 : -1;`,
         {
             st = JSON.parse(JSON.stringify($stLS));
             ast.editor.setValue(st.userJS);
-            //if(showAlert){alert('loaded!');};
         }
         else{
             alert('No Data To Load!');
         }
-    }
-    function showModal(type){
-        ast.modal.type = type;
-        ast.modal.show = true;
-    }
-    function closeModal()
-    {
-        ast.modal.show = false;
     }
     function loadExample(json)
     {
@@ -167,164 +151,21 @@ s > 0 ? 1 : -1;`,
             }
         };
     }
+    //
+    function showModal(type){
+        ast.modal.type = type;
+        ast.modal.show = true;
+    }
+    function closeModal()
+    {
+        ast.modal.show = false;
+    }
+    //
     function setup(skipLS=false){
         st.paramVals.length = cfg.paramCount;
         st.paramVals.fill(0.5);
-        // if(!skipLS)
-        // {
-        //     loadFromLS(false);
-        // }
-        
     }
     setup();
-
-    // Wave runner
-    function wave(x,s,p)
-    {
-        const js = st.userJS;
-        try{
-            st.errStr = "";
-            st.hasErr = false;
-            let w = [];
-            w.length = cfg.maxWaves;
-            // Math vars
-            const pi = Math.PI;
-            const pi2 = Math.PI*2;
-            const halfPi = Math.PI/2;
-            const sin = Math.sin;
-            const cos = Math.cos;
-            const abs = Math.abs;
-            const tan = Math.tan;
-            const tanh = Math.tanh;
-            const round = Math.round;
-            const floor = Math.floor;
-            const ceil = Math.ceil;
-            const random = Math.random;
-
-            const xr = x/pi2;
-
-            const we = eval(js);
-            w[0] = w[0] === undefined ? we : w[0];
-            return w;
-        }
-        catch(err)
-        {
-            if(st.errStr !== err)
-            {
-                //console.log(err);
-            }
-            st.errStr = err;
-            st.hasErr = true;
-            return 0;
-        }
-    }
-
-    // Canvas
-    import { Canvas, Layer, t } from "svelte-canvas";
-
-    $: render = ({ context, width, height }) => {
-        const ctx = context;// cant rename in render func
-        const w = 640;
-        const h = 320;
-        const hc = h/2;
-
-        const amp = st.amplitude/2;
-
-        const gs = st.gridSize*2;
-        const gx = w/(st.periods*gs);
-        const gy = h/gs;
-
-        ctx.clearRect(0,0,w,h);
-
-        if(st.showGrid)
-        {
-            for (let i =0; i < st.periods*gs; i++)
-            {
-                ctx.beginPath();
-                ctx.setLineDash([]);
-                ctx.moveTo(gx*(i+1),0);
-                ctx.lineTo(gx*(i+1),h);
-                ctx.strokeStyle = "rgb(55,50,55)";
-                ctx.lineWidth = 1;
-                ctx.stroke();
-                ctx.closePath();
-            }
-            for (let i =0; i < gs; i++)
-            {
-                ctx.beginPath();
-                ctx.setLineDash([]);
-                ctx.moveTo(0,gy*(i+1));
-                ctx.lineTo(w,gy*(i+1));
-                ctx.strokeStyle = "rgb(55,50,55)";
-                ctx.lineWidth = 1;
-                ctx.stroke();
-                ctx.closePath();
-            }
-        }
-        
-
-        // Could add an optimization to only run active waves
-        for(let wi = 0; wi < cfg.maxWaves; wi++)
-        {
-            ctx.beginPath();
-            ctx.setLineDash([]);
-            ctx.lineWidth = 2;
-            ctx.moveTo(0, hc);
-            for(let i = 0; i < w; i++)
-            {
-                const x = i/(w/(Math.PI*(st.periods*2)));
-                const s = Math.sin(x);
-                if(i===0)
-                {
-                    // Dont draw a line on first move
-                    ctx.moveTo(i,hc+(-wave(x,s, st.paramVals)[wi]*(amp*hc)));
-                }
-                else{
-                    ctx.lineTo(i,hc+(-wave(x,s, st.paramVals)[wi]*(amp*hc)));
-                }
-            }
-            const strokeStyles = [
-                "rgb(200,255,255",
-                "rgb(255,200,255)",
-                "rgb(255,255,200)",
-                
-                "rgb(255,255,255)",
-
-                "rgb(255,200,255)",
-                "rgb(255,255,200)",
-                "rgb(200,255,255",
-                "rgb(255,255,255)",
-
-                "rgb(255,200,255)",
-                "rgb(255,255,200)",
-                "rgb(200,255,255",
-                "rgb(255,255,255)",
-
-                "rgb(255,200,255)",
-                "rgb(255,255,200)",
-                "rgb(200,255,255",
-                "rgb(255,255,255)"
-            ];
-            ctx.strokeStyle = strokeStyles[wi];           
-            ctx.stroke();
-            ctx.closePath();
-        }
-        if(st.showRefSine)
-        {
-            ctx.beginPath();
-            ctx.setLineDash([5, 15]);
-            ctx.lineWidth = 1;
-            // ref sine
-            for(let i = 0; i < w; i++)
-            {
-                const x = i/(w/(Math.PI*(st.periods*2)));
-                const s = Math.sin(x);
-                ctx.lineTo(i,hc+(-s*(amp*hc)));
-            }
-            ctx.strokeStyle = "rgb(255,225,255)";
-            ctx.stroke();
-        }
-    };
 </script>
 <svelte:head>
 	<script src="https://cdn.jsdelivr.net/npm/ace-builds@1.13.2/src-noconflict/ace.min.js" on:load={setup}></script>
@@ -339,63 +180,41 @@ s > 0 ? 1 : -1;`,
     <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.13.2/src-noconflict/ace.min.js"></script>
   </head>
   <body>
+    <div class="mobileWarning">
+        Hi, thanks for checking out DSPGraphJS. 
+        <br><br>
+        We're still working on responsive design.
+        <br><br>
+        Please try using this tool on a full screen desktop browser or check back later for mobile support!
+        <br><br>
+        This tool currently only supports browser windows that are at least 1200px wide.
+    </div>
     {#if ast.modal.show}
     <div class="modalShade" on:click={closeModal}></div>
     <div class="modal">
         <button class="modalCloseBtn" on:click={closeModal}>x</button>
         <h3>{ast.modal.type.toUpperCase()}</h3>
         {#if ast.modal.type === "app"}
-        <center>
-            DSPGraphJS
-            <br>
-            © Mathieu Dombrock 2022
-            <br>
-            <Clipboard
-                text={JSON.stringify(st, null, 2)}
-                let:copy
-                on:copy={() => {
-                    alert('Has Copied to Clipboard👏');
-                }}>
-                <button on:click={copy}>Copy State</button>
-            </Clipboard>
-            <button on:click={ast.useAce = !ast.useAce}>Disable Ace</button>
-            <a href="https://replicataudio.com" target="_blank" rel="noreferrer"><button>ReplicatAudio</button></a>
-            <a href="https://github.com/ReplicatAudio" target="_blank" rel="noreferrer"><button>Source Code</button></a>
-        </center>
+        <ModalApp ast={ast} />
         {/if}
         {#if ast.modal.type === "examples"}
-        <center>
-            <br>
-            {#each Object.entries(examples) as [key, val]}
-            <button on:click={()=>{loadExample(val)}} class="loadItem">{key}</button>
-            {/each}
-        </center>
+        <ModalExamples examples={examples} loadExample={loadExample} />
         {/if}
         {#if ast.modal.type === "help"}
-            <pre>HELP</pre>
+        <ModalHelp />
         {/if}
         {#if ast.modal.type === "save"}
-        <br>
-        <input bind:value={st.fileName} type="text" id="fileName">
-        <button on:click={downloadFile}>save to file</button>
-        <button on:click={saveToLS}>save to browser</button>
+        <ModalSave st={st} downloadFile={downloadFile} saveToLS={saveToLS} />
         {/if}
         {#if ast.modal.type === "load"}
-        <br>
-        <input style="display:none" type="file" accept=".dsp.json" on:change={(e)=>loadFile(e)} bind:this={ast.fileinput} >
-        <button on:click={()=>{ast.fileinput.click()}}>load from file</button>
-        <button on:click={loadFromLS}>load from browser</button>
+        <ModalLoad loadFile={loadFile} loadFromLS={loadFromLS} ast={ast} />
         {/if}
     </div>
     {/if}
     <div class="codeArea">
         <div class="menu">
             <button class="menuItem" on:click={()=>{showModal("app")}}>App</button>
-            <!-- <button class="menuItem" on:click={saveToLS}>Save</button> -->
-            <!-- <button class="menuItem" on:click={downloadFile}>Save</button> -->
             <button class="menuItem" on:click={()=>{showModal("save")}}>Save</button>
-            <!-- <button class="menuItem" on:click={loadFromLS}>Load</button> -->
-            <!-- <button class="menuItem" on:click={loadFile}>Load</button> -->
             <button class="menuItem" on:click={()=>{showModal("load")}}>Load</button>
             <button class="menuItem" on:click={resetState}>Reset</button>
             <button class="menuItem" on:click={()=>{showModal("examples")}}>Examples</button>
@@ -419,9 +238,7 @@ s > 0 ? 1 : -1;`,
             </a>
         </div>
         <br>
-        <Canvas width={640} height={320}>
-            <Layer {render} />
-        </Canvas>
+        <Plot st={st} cfg={cfg} />
         <br>
         <div class="scrollArea">
             

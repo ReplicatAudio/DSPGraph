@@ -26,7 +26,11 @@ canvas{
     background:var(--bgSub);
     /* border-radius: 0.5rem; */
 }
-
+pre{
+    background:var(--bgSub);
+    color:var(--textCode);
+    padding:0.5rem;
+}
 input[type="text"], input[type="file"], input[type="number"], input[type="range"], input[type="checkbox"], input[type="number"]{
     background:var(--bg);
     color:var(--text);
@@ -34,6 +38,10 @@ input[type="text"], input[type="file"], input[type="number"], input[type="range"
     border:none;
     outline:none;
     padding:0.5rem;
+}
+input[type="range"]
+{
+    padding:0;
 }
 input[type="file"]
 {
@@ -57,6 +65,24 @@ button{
 button:hover{
     background:var(--bgSub);
     color:var(--textHighlight);
+}
+.mobileWarning{
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background:var(--bg);
+    text-align: center;
+    display:none;
+    z-index:999999;
+    padding-top:10vw;
+}
+@media (max-width: 1200px) {
+    .mobileWarning
+    {
+        display: block;
+    }
 }
 .controlBtn{
     display:block;
@@ -169,6 +195,9 @@ button:hover{
     text-align: center;
     /* border-radius: 0.5rem; */
 }
+.sliderWrapper input[type="range"]{
+    width:128px;
+}
 .tag{
     padding:0.25rem;
     background:var(--bgSub);
@@ -191,9 +220,14 @@ button:hover{
     top:10vh;
     left:32vw;
     width:calc(100vw - 64vw);
-    min-height: calc(100vh - 40vh);
+    height: calc(100vh - 40vh);
     background:var(--bg2);
     padding:1rem;
+    overflow:hidden;
+}
+.modalScroll{
+    height: 50vh;
+    overflow-y: scroll;
 }
 .modalCloseBtn{
     position:absolute;

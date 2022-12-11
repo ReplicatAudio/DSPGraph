@@ -1,0 +1,22 @@
+{
+    "paramVals": [
+      0.26,
+      0.193,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "periods": 2,
+    "amplitude": 1,
+    "errStr": "",
+    "hasErr": false,
+    "showRefSine": true,
+    "userJS": "/*\n\nGlobal Variable Example:\n---\nKeep global variables outside of the wave loop\n\n*/\n// Plot our global variable to wave 1\nw[0] = g[0]\n\n// Only update the global variable\n// If x is less than pi2\nif(x < pi2)\n{\n    g[0] = sin(x);\n}\n\n// Read from a buffer of old values\nconst index = g[1].length-64 > 0 ? g[1].length-64 : 0;\nw[1] = g[1][index];\n// Push current value to the buffer\ng[1].push(s);\n\n// User p[0] to iterate through samples\n// in the buffer\nw[2] = g[1][floor(p[0]*100)];",
+    "showGrid": true,
+    "showGlobal": false,
+    "gridSize": 4,
+    "showParams": true
+  }

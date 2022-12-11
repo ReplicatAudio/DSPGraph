@@ -1,18 +1,22 @@
 {
-"paramVals": [
-    0.25,
-    0.5,
-    0.5,
-    0.5,
-    0.5,
-    0.5,
-    0.5,
-    0.5
-],
-"periods": 1,
-"amplitude": 0.5,
-"errStr": "",
-"hasErr": false,
-"showRefSine": true,
-"userJS": "/*\n\nClipping Example\n---\nClipping happens when your signal goes over 1 or below -1.\nDigital audio interfaces can not exceed these values. \nAnything outside of this range is \"clipped\".\n\n*/\n\n// Setup gain (control with p[0] slider)\nconst g = 1+p[0];\n\n// Apply gain to sine\ns *= g;\n\n// Setup Clip\ns = s > 1 ? 1 : s;\ns = s < -1 ? -1 : s;\n"
-}
+    "paramVals": [
+      0.25,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "periods": 2,
+    "amplitude": 1,
+    "errStr": "",
+    "hasErr": false,
+    "showRefSine": true,
+    "userJS": "/*\n\nClipping Example\n---\nClipping happens when your signal goes over 1 or below -1.\nDigital audio interfaces can not exceed these values. \nAnything outside of this range is \"clipped\".\n\n*/\n\n// Setup gain (control with p[0] slider)\nconst g = 1+p[0];\n\n// Apply gain to sine\ns *= g;\n\n// Setup Clip\ns = s > 1 ? 1 : s;\ns = s < -1 ? -1 : s;\n",
+    "showGlobal": false,
+    "gridSize": 4,
+    "showGrid": true,
+    "showParams": true
+  }
