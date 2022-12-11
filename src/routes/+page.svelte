@@ -344,6 +344,7 @@ s > 0 ? 1 : -1;`,
         <h3>{ast.modal.type.toUpperCase()}</h3>
         {#if ast.modal.type === "app"}
         <center>
+            DSPGraphJS
             <br>
             © Mathieu Dombrock 2022
             <br>
