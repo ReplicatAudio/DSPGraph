@@ -1,4 +1,5 @@
 import test from './test.json';
+import tradX from './x.json';
 import square from './square.json';
 import clipping from './clipping.json';
 import tanTri from './tanTri.json';
@@ -9,6 +10,7 @@ import buffer from './buffer.json';
 
 export const examples = {
     'Test': test,
+    'Traditional X': tradX,
     'Square': square,
     'Clipping': clipping,
     'Tan Triangle': tanTri,
