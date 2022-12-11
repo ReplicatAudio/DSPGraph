@@ -58,6 +58,24 @@ button:hover{
     background:var(--bgSub);
     color:var(--textHighlight);
 }
+.mobileWarning{
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    background:var(--bg);
+    text-align: center;
+    display:none;
+    z-index:999999;
+    padding-top:10vw;
+}
+@media (max-width: 1200px) {
+    .mobileWarning
+    {
+        display: block;
+    }
+}
 .controlBtn{
     display:block;
     width:100%;

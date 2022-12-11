@@ -1,14 +1,15 @@
 <script>
     import { onMount } from 'svelte'
-    import Plot from "./plot.svelte";
-    import { stLS } from "./store.js";
+    import Plot from "../comps/plot.svelte";
+	import ModalApp from '../comps/modalApp.svelte';
+	import ModalExamples from '../comps/modalExamples.svelte';
+	import ModalLoad from '../comps/modalLoad.svelte';
+	import ModalHelp from '../comps/modalHelp.svelte';
+	import ModalSave from '../comps/modalSave.svelte';
+    import { stLS } from "../store.js";
     import {examples} from "../examples";
-    import defaultJS from './default';
-	import ModalApp from './modalApp.svelte';
-	import ModalExamples from './modalExamples.svelte';
-	import ModalLoad from './modalLoad.svelte';
-	import ModalHelp from './modalHelp.svelte';
-	import ModalSave from './modalSave.svelte';
+    import defaultJS from '../default';
+    
     const cfg = {
         maxWaves: 4,
         paramCount: 8
@@ -178,6 +179,15 @@
     <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.13.2/src-noconflict/ace.min.js"></script>
   </head>
   <body>
+    <div class="mobileWarning">
+        Hi, thanks for checking out DSPGraphJS. 
+        <br><br>
+        We're still working on responsive design.
+        <br><br>
+        Please try using this tool on a full screen desktop browser or check back later for mobile support!
+        <br><br>
+        This tool currently only supports browser windows that are at least 1200px wide.
+    </div>
     {#if ast.modal.show}
     <div class="modalShade" on:click={closeModal}></div>
     <div class="modal">
