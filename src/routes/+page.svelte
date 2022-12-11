@@ -45,6 +45,7 @@
         ast.editor = ace.edit("editor");
         ast.editor.setTheme("ace/theme/pastel_on_dark");
         ast.editor.session.setMode("ace/mode/javascript");
+        // https://github.com/ajaxorg/ace/wiki/Configuring-Ace
         ast.editor.setOptions({
             selectionStyle: "text",
             //autoScrollEditorIntoView: true,
