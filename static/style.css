@@ -179,10 +179,10 @@ button:hover{
 .modal{
     position:absolute;
     z-index: 999999;
-    top:20rem;
-    left:32rem;
-    width:calc(100vw - 64rem);
-    height: calc(100vh - 40rem);
+    top:10vh;
+    left:32vw;
+    width:calc(100vw - 64vw);
+    min-height: calc(100vh - 40vh);
     background:var(--bg2);
     padding:1rem;
 }
