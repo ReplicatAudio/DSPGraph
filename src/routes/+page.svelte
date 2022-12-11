@@ -26,7 +26,10 @@
         });
         ast.editor.setValue(st.userJS);
         setInterval(function(){
-            st.userJS = ast.editor.getValue()
+            if(st.useAce)
+            {
+                st.userJS = ast.editor.getValue();
+            }
         }, 333);
 	})
     
@@ -57,6 +60,7 @@
         hasErr: false,
         showRefSine: true,
         showGrid:true,
+        useAce: true,
         gridSize:4,
         fileName: "MyDSP",
         userJS: `// Write your JS code here
@@ -348,6 +352,7 @@ s > 0 ? 1 : -1;`,
                 }}>
                 <button on:click={copy}>Copy State</button>
             </Clipboard>
+            <button on:click={st.useAce = !st.useAce}>Disable Ace</button>
             <a href="https://replicataudio.com" target="_blank" rel="noreferrer"><button>ReplicatAudio</button></a>
             <a href="https://github.com/ReplicatAudio" target="_blank" rel="noreferrer"><button>Source Code</button></a>
         </center>
@@ -395,8 +400,9 @@ s > 0 ? 1 : -1;`,
             See the JS Console for more info.
         </div>
         {/if}
-        <div id="editor" bind:this={ast.editor} on:click={resizeEditor}>Loading Editor...</div>
-        <!-- <textarea bind:value={st.userJS} id="userJS" spellcheck="false"></textarea> -->
+        <textarea bind:value={st.userJS} id="userJS" spellcheck="false" class:hidden={st.useAce}></textarea>
+        <div id="editor" bind:this={ast.editor} on:click={resizeEditor} class:hidden={!st.useAce}>Loading Editor...</div>
+        
     </div>
     <div class="plotArea">
         <div class="headerImg">

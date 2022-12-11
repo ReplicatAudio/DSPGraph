@@ -64,6 +64,9 @@ button:hover{
     bottom:0;
     left: 0;
 }
+.hidden{
+    display:none;
+}
 .headerImg{
     background:var(--bgSub2);
     position:fixed;
