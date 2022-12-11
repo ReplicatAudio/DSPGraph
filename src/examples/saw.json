@@ -1,20 +1,21 @@
 {
-    "paramVals": [
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5
-    ],
-    "periods": 2,
-    "amplitude": 0.5,
-    "errStr": "",
-    "hasErr": false,
-    "showRefSine": true,
-    "userJS": "/*\n\nSaw Example:\n---\nA simple saw wave\n\n*/\n\nlet saw = (x % pi2);\nsaw = saw * 2;\nsaw = (saw / pi2)-1;\n\n// Uncomment to reverse the saw\n//-saw\n",
-    "showGrid": true,
-    "gridSize": 4
-  }
+  "paramVals": [
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+  ],
+  "periods": 2,
+  "amplitude": 1,
+  "errStr": "",
+  "hasErr": false,
+  "showRefSine": true,
+  "userJS": "/*\n\nSaw Example:\n---\nA simple saw wave\n\n*/\n\nlet saw = (x % pi2);\nsaw = saw * 2;\nsaw = (saw / pi2)-1;\n\n// Uncomment to reverse the saw\n//-saw\n",
+  "showGrid": true,
+  "gridSize": 4,
+  "showGlobal": false
+}

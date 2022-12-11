@@ -24,6 +24,7 @@
             const floor = Math.floor;
             const ceil = Math.ceil;
             const random = Math.random;
+            const noise = ()=>{return (Math.random()*2)-1};
 
             const xr = x/pi2;
 

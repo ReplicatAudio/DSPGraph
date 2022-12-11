@@ -1,20 +1,21 @@
 {
-    "paramVals": [
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5
-    ],
-    "periods": 2,
-    "amplitude": 0.5,
-    "errStr": "",
-    "hasErr": false,
-    "showRefSine": true,
-    "userJS": "/*\n\nWavetable Example 2:\n---\nA simple sine/triangle like wave table\n\n*/\n\nconst t = [0, 0.5, 1, 0.5, 0, -0.5, -1, -0.5];\n\nlet ti = (x % pi2);\nti = ti * (t.length);\nti = ti / pi2;\nti = floor(ti);\n\nt[ti];\n",
-    "showGrid": true,
-    "gridSize": 4
-  }
+  "paramVals": [
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+  ],
+  "periods": 2,
+  "amplitude": 1,
+  "errStr": "",
+  "hasErr": false,
+  "showRefSine": true,
+  "userJS": "/*\n\nWavetable Example 2:\n---\nA simple sine/triangle like wave table\n\n*/\n\nconst t = [0, 0.5, 1, 0.5, 0, -0.5, -1, -0.5];\n\nlet ti = (x % pi2);\nti = ti * (t.length);\nti = ti / pi2;\nti = floor(ti);\n\nt[ti];\n",
+  "showGrid": true,
+  "gridSize": 4,
+  "showGlobal": false
+}
