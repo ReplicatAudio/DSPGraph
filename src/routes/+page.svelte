@@ -1,4 +1,38 @@
 <script>
+    import { onMount } from 'svelte'
+	
+	onMount(async () => {
+        ace.config.set('basePath', 'https://cdn.jsdelivr.net/npm/ace-builds@1.13.2/src-noconflict/');
+        ast.editor = ace.edit("editor");
+        // ace.edit(editor, {
+        //     mode: "ace/mode/javascript",
+        //     selectionStyle: "text"
+        // });
+        ast.editor.setTheme("ace/theme/twilight");
+        //editor.resize();
+        //editor.setTheme("ace/theme/solarized");
+        ast.editor.session.setMode("ace/mode/javascript");
+        ast.editor.setOptions({
+            selectionStyle: "text",
+            autoScrollEditorIntoView: true,
+            copyWithEmptySelection: true,
+            animatedScroll: false,
+            showPrintMargin: false,
+            scrollPastEnd: false,
+            minLines: 10,
+            dragEnabled: false,
+            hScrollBarAlwaysVisible: true,
+            vScrollBarAlwaysVisible: true,
+        });
+        setInterval(function(){
+            st.userJS = ast.editor.getValue()
+        }, 333);
+	})
+    
+    function resizeEditor()
+    {
+        editor.resize();
+    }
     import Clipboard from "svelte-clipboard";
     import { stLS } from "./store.js";
     import {examples} from "../examples";
@@ -12,6 +46,7 @@
             type: 'none',
         },
         fileinput: undefined,
+        editor: undefined
     };
     let st = {
         paramVals: [],
@@ -127,6 +162,7 @@ s > 0 ? 1 : -1;`,
         // {
         //     loadFromLS(false);
         // }
+        
     }
     setup();
 
@@ -277,7 +313,9 @@ s > 0 ? 1 : -1;`,
         }
     };
 </script>
-
+<svelte:head>
+	<script src="https://cdn.jsdelivr.net/npm/ace-builds@1.13.2/src-noconflict/ace.min.js" on:load={setup}></script>
+</svelte:head>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -285,6 +323,7 @@ s > 0 ? 1 : -1;`,
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ReplicatAudio DSP Tool</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.13.2/src-noconflict/ace.min.js"></script>
   </head>
   <body>
     {#if ast.modal.show}
@@ -352,7 +391,8 @@ s > 0 ? 1 : -1;`,
             See the JS Console for more info.
         </div>
         {/if}
-        <textarea bind:value={st.userJS} id="userJS" spellcheck="false"></textarea>
+        <div id="editor" bind:this={ast.editor} on:click={resizeEditor}>xxx</div>
+        <!-- <textarea bind:value={st.userJS} id="userJS" spellcheck="false"></textarea> -->
     </div>
     <div class="plotArea">
         <div class="headerImg">
