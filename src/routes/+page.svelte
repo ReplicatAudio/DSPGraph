@@ -21,6 +21,7 @@
         showRefSine: true,
         showGrid:true,
         gridSize:4,
+        fileName: "MyDSP",
         userJS: `// Write your JS code here
 // x -> graph x
 // s -> sine (Math.sin(x))
@@ -74,7 +75,53 @@ s > 0 ? 1 : -1;`,
         st = JSON.parse(JSON.stringify(json));
         closeModal();
     }
+    function downloadFile()
+    {
+        // Chat GTP
+        // write front-end js code to save a json object to a file on the users hard drive
+        // Edited
 
+        // Create a new Blob object containing the file object 
+        let fileBlob = new Blob([JSON.stringify(st)], { type: 'application/json' });
+
+        // Create a link element
+        let a = document.createElement('a');
+
+        // Set the href and download attributes of the link element
+        a.href = URL.createObjectURL(fileBlob);
+        a.download = st.fileName+".json";
+
+        // Append the link element to the DOM
+        document.body.appendChild(a);
+
+        // Simulate a click on the link element
+        a.click();
+
+        // Remove the link element from the DOM
+        document.body.removeChild(a);
+    }
+    function loadFile()
+    {
+
+
+    }
+    function handleFileChange(event) {
+        // Get the selected file
+        const file = event.detail.files[0];
+
+        // Create a new FileReader instance
+        const reader = new FileReader();
+
+        // Listen for the 'load' event on the FileReader instance
+        reader.addEventListener('load', function() {
+        // Get the file content
+        const fileContent = reader.result;
+        // Use the file content as needed...
+        });
+
+        // Read the file as text
+        reader.readAsText(file);
+    }
     function setup(skipLS=false){
         st.paramVals.length = cfg.paramCount;
         st.paramVals.fill(0.5);
@@ -275,13 +322,26 @@ s > 0 ? 1 : -1;`,
         {#if ast.modal.type === "help"}
             <pre>HELP</pre>
         {/if}
+        {#if ast.modal.type === "save"}
+            <input bind:value={st.fileName} type="text" id="fileName">
+            <button on:click={downloadFile}>save to file</button>
+            <button on:click={saveToLS}>save to browser</button>
+        {/if}
+        {#if ast.modal.type === "load"}
+            <button on:click={loadFromLS}>load from browser</button>
+            <input type="file" on:change={handleFileChange} />
+        {/if}
     </div>
     {/if}
     <div class="codeArea">
         <div class="menu">
             <button class="menuItem" on:click={()=>{showModal("app")}}>App</button>
-            <button class="menuItem" on:click={saveToLS}>Save</button>
-            <button class="menuItem" on:click={loadFromLS}>Load</button>
+            <!-- <button class="menuItem" on:click={saveToLS}>Save</button> -->
+            <!-- <button class="menuItem" on:click={downloadFile}>Save</button> -->
+            <button class="menuItem" on:click={()=>{showModal("save")}}>Save</button>
+            <!-- <button class="menuItem" on:click={loadFromLS}>Load</button> -->
+            <!-- <button class="menuItem" on:click={loadFile}>Load</button> -->
+            <button class="menuItem" on:click={()=>{showModal("load")}}>Load</button>
             <button class="menuItem" on:click={resetState}>Reset</button>
             <button class="menuItem" on:click={()=>{showModal("examples")}}>Examples</button>
             <button class="menuItem" on:click={()=>{showModal("help")}}>Help</button>
