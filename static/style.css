@@ -57,13 +57,6 @@ button:hover{
     background:var(--bgSub);
     color:var(--textHighlight);
 }
-#editor { 
-    position: absolute;
-    top: 32px;
-    right: 0;
-    bottom:0;
-    left: 0;
-}
 .hidden{
     display:none;
 }
@@ -106,13 +99,21 @@ button:hover{
     overflow-y: scroll;
 }
 .codeArea{
-    background:var(--bgSub);
-    position:absolute;
+    background:rgb(40,42,53);
+    position:fixed;
     top:0;
     left:0;
+    bottom:0;
     width:45vw;
-    height:100vh;
-    overflow: scroll;
+    /* height:100vh; */
+    /* overflow: scroll; */
+}
+#editor { 
+    position: absolute;
+    top: 64px;
+    right: 0;
+    bottom:0;
+    left: 0;
 }
 .codeArea textarea{
     position:fixed;

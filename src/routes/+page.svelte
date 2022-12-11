@@ -8,25 +8,26 @@
         //     mode: "ace/mode/javascript",
         //     selectionStyle: "text"
         // });
-        ast.editor.setTheme("ace/theme/twilight");
+        //ast.editor.setTheme("ace/theme/dracula");
+        ast.editor.setTheme("ace/theme/one_dark");
         //editor.resize();
         //editor.setTheme("ace/theme/solarized");
         ast.editor.session.setMode("ace/mode/javascript");
         ast.editor.setOptions({
             selectionStyle: "text",
-            autoScrollEditorIntoView: true,
-            copyWithEmptySelection: true,
-            animatedScroll: false,
-            showPrintMargin: false,
-            scrollPastEnd: false,
-            minLines: 10,
-            dragEnabled: false,
-            hScrollBarAlwaysVisible: true,
-            vScrollBarAlwaysVisible: true,
+            //autoScrollEditorIntoView: true,
+            //copyWithEmptySelection: true,
+            //animatedScroll: false,
+            //showPrintMargin: false,
+            //scrollPastEnd: false,
+            //minLines: 10,
+            //dragEnabled: false,
+            //hScrollBarAlwaysVisible: true,
+            //vScrollBarAlwaysVisible: true,
         });
         ast.editor.setValue(st.userJS);
         setInterval(function(){
-            if(st.useAce)
+            if(ast.useAce)
             {
                 st.userJS = ast.editor.getValue();
             }
@@ -50,7 +51,8 @@
             type: 'none',
         },
         fileinput: undefined,
-        editor: undefined
+        editor: undefined,
+        useAce: true,
     };
     let st = {
         paramVals: [],
@@ -60,7 +62,6 @@
         hasErr: false,
         showRefSine: true,
         showGrid:true,
-        useAce: true,
         gridSize:4,
         fileName: "MyDSP",
         userJS: `// Write your JS code here
@@ -280,9 +281,10 @@ s > 0 ? 1 : -1;`,
                 }
             }
             const strokeStyles = [
+                "rgb(200,255,255",
                 "rgb(255,200,255)",
                 "rgb(255,255,200)",
-                "rgb(200,255,255",
+                
                 "rgb(255,255,255)",
 
                 "rgb(255,200,255)",
@@ -352,7 +354,7 @@ s > 0 ? 1 : -1;`,
                 }}>
                 <button on:click={copy}>Copy State</button>
             </Clipboard>
-            <button on:click={st.useAce = !st.useAce}>Disable Ace</button>
+            <button on:click={ast.useAce = !ast.useAce}>Disable Ace</button>
             <a href="https://replicataudio.com" target="_blank" rel="noreferrer"><button>ReplicatAudio</button></a>
             <a href="https://github.com/ReplicatAudio" target="_blank" rel="noreferrer"><button>Source Code</button></a>
         </center>
@@ -400,8 +402,8 @@ s > 0 ? 1 : -1;`,
             See the JS Console for more info.
         </div>
         {/if}
-        <textarea bind:value={st.userJS} id="userJS" spellcheck="false" class:hidden={st.useAce}></textarea>
-        <div id="editor" bind:this={ast.editor} on:click={resizeEditor} class:hidden={!st.useAce}>Loading Editor...</div>
+        <textarea bind:value={st.userJS} id="userJS" spellcheck="false" class:hidden={ast.useAce}></textarea>
+        <div id="editor" bind:this={ast.editor} on:click={resizeEditor} class:hidden={!ast.useAce}>Loading Editor...</div>
         
     </div>
     <div class="plotArea">
@@ -414,6 +416,7 @@ s > 0 ? 1 : -1;`,
         <Canvas width={640} height={320}>
             <Layer {render} />
         </Canvas>
+        <br>
         <div class="scrollArea">
             <div class="sliderGroup">
                 <h3>Parameter Controls</h3>
