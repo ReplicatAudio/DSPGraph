@@ -7,7 +7,7 @@
     --textLight:rgb(255, 233, 255);
     --textAlt: rgb(33,33,33);
     --textCode: rgb(99, 254, 169);
-    --textCode: rgb(136, 136, 255);
+    --textCode: rgb(75, 169, 247);
     --textHighlight: rgb(216, 216, 255);
     --warning:rgb(255, 63, 63);
 }
@@ -26,15 +26,17 @@ canvas{
     background:var(--bgSub);
     border-radius: 0.5rem;
 }
-input[type="number"]{
+
+input[type="text"], input[type="file"], input[type="number"], input[type="range"], input[type="checkbox"], input[type="number"]{
     background:var(--bg);
     color:var(--text);
     cursor:pointer;
-}
-input[type="range"], input[type="checkbox"], input[type="number"]{
-    cursor:pointer;
     border:none;
     outline:none;
+}
+input[type="file"]
+{
+    display:none;
 }
 h1, h2, h3{
     color:var(--textHighlight);
@@ -170,10 +172,10 @@ button:hover{
 .modal{
     position:absolute;
     z-index: 999999;
-    top:10rem;
-    left:10rem;
-    width:calc(100vw - 20rem);
-    height: calc(100vh - 20rem);
+    top:20rem;
+    left:32rem;
+    width:calc(100vw - 64rem);
+    height: calc(100vh - 40rem);
     background:var(--bg2);
     padding:1rem;
 }

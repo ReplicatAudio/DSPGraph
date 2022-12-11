@@ -10,7 +10,8 @@
         modal: {
             show: false,
             type: 'none',
-        }
+        },
+        fileinput: undefined,
     };
     let st = {
         paramVals: [],
@@ -89,7 +90,7 @@ s > 0 ? 1 : -1;`,
 
         // Set the href and download attributes of the link element
         a.href = URL.createObjectURL(fileBlob);
-        a.download = st.fileName+".json";
+        a.download = st.fileName+".dsp.json";
 
         // Append the link element to the DOM
         document.body.appendChild(a);
@@ -100,27 +101,24 @@ s > 0 ? 1 : -1;`,
         // Remove the link element from the DOM
         document.body.removeChild(a);
     }
-    function loadFile()
+    function loadFile(e)
     {
-
-
-    }
-    function handleFileChange(event) {
-        // Get the selected file
-        const file = event.detail.files[0];
-
-        // Create a new FileReader instance
-        const reader = new FileReader();
-
-        // Listen for the 'load' event on the FileReader instance
-        reader.addEventListener('load', function() {
-        // Get the file content
-        const fileContent = reader.result;
-        // Use the file content as needed...
-        });
-
-        // Read the file as text
+        let file = e.target.files[0];
+        let reader = new FileReader();
+        //reader.readAsDataURL(file);
         reader.readAsText(file);
+        reader.onload = e => {
+            try{
+                st = JSON.parse(e.target.result);
+                alert('Loaded!');
+            }    
+            catch(err){
+                console.log(err);
+                alert('Could not load that file!');
+            }
+            
+
+        };
     }
     function setup(skipLS=false){
         st.paramVals.length = cfg.paramCount;
@@ -328,8 +326,9 @@ s > 0 ? 1 : -1;`,
             <button on:click={saveToLS}>save to browser</button>
         {/if}
         {#if ast.modal.type === "load"}
+            <input style="display:none" type="file" accept=".dsp.json" on:change={(e)=>loadFile(e)} bind:this={ast.fileinput} >
+            <button on:click={()=>{ast.fileinput.click()}}>load from file</button>
             <button on:click={loadFromLS}>load from browser</button>
-            <input type="file" on:change={handleFileChange} />
         {/if}
     </div>
     {/if}
