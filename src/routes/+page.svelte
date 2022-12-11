@@ -38,15 +38,7 @@
     onMount(async () => {
         ace.config.set('basePath', 'https://cdn.jsdelivr.net/npm/ace-builds@1.13.2/src-noconflict/');
         ast.editor = ace.edit("editor");
-        // ace.edit(editor, {
-        //     mode: "ace/mode/javascript",
-        //     selectionStyle: "text"
-        // });
-        //ast.editor.setTheme("ace/theme/dracula");
-        //ast.editor.setTheme("ace/theme/one_dark");
         ast.editor.setTheme("ace/theme/pastel_on_dark");
-        //editor.resize();
-        //editor.setTheme("ace/theme/solarized");
         ast.editor.session.setMode("ace/mode/javascript");
         ast.editor.setOptions({
             selectionStyle: "text",
@@ -88,7 +80,7 @@
         $stLS = JSON.parse(JSON.stringify(st));
         console.log(JSON.stringify($stLS, null, 2));
     }
-    function loadFromLS(showAlert=true)
+    function loadFromLS()
     {
         if(showAlert)
         {
@@ -98,7 +90,6 @@
         {
             st = JSON.parse(JSON.stringify($stLS));
             ast.editor.setValue(st.userJS);
-            //if(showAlert){alert('loaded!');};
         }
         else{
             alert('No Data To Load!');
@@ -194,14 +185,6 @@
             <br>
             © Mathieu Dombrock 2022
             <br>
-            <Clipboard
-                text={JSON.stringify(st, null, 2)}
-                let:copy
-                on:copy={() => {
-                    alert('Has Copied to Clipboard👏');
-                }}>
-                <button on:click={copy}>Copy State</button>
-            </Clipboard>
             <button on:click={ast.useAce = !ast.useAce}>Disable Ace</button>
             <a href="https://replicataudio.com" target="_blank" rel="noreferrer"><button>ReplicatAudio</button></a>
             <a href="https://github.com/ReplicatAudio" target="_blank" rel="noreferrer"><button>Source Code</button></a>
@@ -223,6 +206,14 @@
         <input bind:value={st.fileName} type="text" id="fileName">
         <button on:click={downloadFile}>save to file</button>
         <button on:click={saveToLS}>save to browser</button>
+        <Clipboard
+            text={JSON.stringify(st, null, 2)}
+            let:copy
+            on:copy={() => {
+                alert('Has Copied to Clipboard👏');
+            }}>
+            <button on:click={copy}>save to clipboard</button>
+        </Clipboard>
         {/if}
         {#if ast.modal.type === "load"}
         <br>
@@ -235,11 +226,7 @@
     <div class="codeArea">
         <div class="menu">
             <button class="menuItem" on:click={()=>{showModal("app")}}>App</button>
-            <!-- <button class="menuItem" on:click={saveToLS}>Save</button> -->
-            <!-- <button class="menuItem" on:click={downloadFile}>Save</button> -->
             <button class="menuItem" on:click={()=>{showModal("save")}}>Save</button>
-            <!-- <button class="menuItem" on:click={loadFromLS}>Load</button> -->
-            <!-- <button class="menuItem" on:click={loadFile}>Load</button> -->
             <button class="menuItem" on:click={()=>{showModal("load")}}>Load</button>
             <button class="menuItem" on:click={resetState}>Reset</button>
             <button class="menuItem" on:click={()=>{showModal("examples")}}>Examples</button>
@@ -264,9 +251,6 @@
         </div>
         <br>
         <Plot st={st} cfg={cfg} />
-        <!-- <Canvas width={640} height={320}>
-            <Layer {render} />
-        </Canvas> -->
         <br>
         <div class="scrollArea">
             
