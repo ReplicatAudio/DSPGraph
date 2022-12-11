@@ -9,7 +9,8 @@
         //     selectionStyle: "text"
         // });
         //ast.editor.setTheme("ace/theme/dracula");
-        ast.editor.setTheme("ace/theme/one_dark");
+        //ast.editor.setTheme("ace/theme/one_dark");
+        ast.editor.setTheme("ace/theme/pastel_on_dark");
         //editor.resize();
         //editor.setTheme("ace/theme/solarized");
         ast.editor.session.setMode("ace/mode/javascript");
