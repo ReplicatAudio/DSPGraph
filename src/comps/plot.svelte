@@ -3,7 +3,7 @@
     export let st;
     export let cfg;
     // Wave runner
-    function wave(x,s,p)
+    function wave(x,s,g,p)
     {
         const js = st.userJS;
         try{
@@ -83,7 +83,10 @@
             }
         }
         
-
+        // Define a global scope / persistent variable
+        let g = [];
+        g.length = 16;
+        g.fill([]);
         // Could add an optimization to only run active waves
         for(let wi = 0; wi < cfg.maxWaves; wi++)
         {
@@ -98,10 +101,10 @@
                 if(i===0)
                 {
                     // Dont draw a line on first move
-                    ctx.moveTo(i,hc+(-wave(x,s, st.paramVals)[wi]*(amp*hc)));
+                    ctx.moveTo(i,hc+(-wave(x,s,g, st.paramVals)[wi]*(amp*hc)));
                 }
                 else{
-                    ctx.lineTo(i,hc+(-wave(x,s, st.paramVals)[wi]*(amp*hc)));
+                    ctx.lineTo(i,hc+(-wave(x,s,g, st.paramVals)[wi]*(amp*hc)));
                 }
             }
             const strokeStyles = [
