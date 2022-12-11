@@ -64,6 +64,8 @@
         showRefSine: true,
         showGrid:true,
         gridSize:4,
+        showParams: false,
+        showGlobal:false,
         fileName: "MyDSP",
         userJS: `// Write your JS code here
 // x -> graph x
@@ -332,7 +334,7 @@ s > 0 ? 1 : -1;`,
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ReplicatAudio DSP Tool</title>
+    <title>DSPGraphJS - ReplicatAudio</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.13.2/src-noconflict/ace.min.js"></script>
   </head>
@@ -373,14 +375,16 @@ s > 0 ? 1 : -1;`,
             <pre>HELP</pre>
         {/if}
         {#if ast.modal.type === "save"}
-            <input bind:value={st.fileName} type="text" id="fileName">
-            <button on:click={downloadFile}>save to file</button>
-            <button on:click={saveToLS}>save to browser</button>
+        <br>
+        <input bind:value={st.fileName} type="text" id="fileName">
+        <button on:click={downloadFile}>save to file</button>
+        <button on:click={saveToLS}>save to browser</button>
         {/if}
         {#if ast.modal.type === "load"}
-            <input style="display:none" type="file" accept=".dsp.json" on:change={(e)=>loadFile(e)} bind:this={ast.fileinput} >
-            <button on:click={()=>{ast.fileinput.click()}}>load from file</button>
-            <button on:click={loadFromLS}>load from browser</button>
+        <br>
+        <input style="display:none" type="file" accept=".dsp.json" on:change={(e)=>loadFile(e)} bind:this={ast.fileinput} >
+        <button on:click={()=>{ast.fileinput.click()}}>load from file</button>
+        <button on:click={loadFromLS}>load from browser</button>
         {/if}
     </div>
     {/if}
@@ -420,19 +424,23 @@ s > 0 ? 1 : -1;`,
         </Canvas>
         <br>
         <div class="scrollArea">
+            
             <div class="sliderGroup">
-                <h3>Parameter Controls</h3>
+                <button on:click={st.showParams = !st.showParams} class="controlBtn"><h3>Parameter Controls</h3></button>
+                {#if st.showParams}
                 {#each st.paramVals as param, i}
                 <div class="sliderWrapper"> 
                     <input type="number" bind:value={param} class="sliderText" min="0" max="1" step="0.01">
                     <br>
                     <input bind:value={param} type="range" min="0" max="1" step="0.001">
-                    <div class="tag">p[{i}]</div>
+                    <div class="tag">{i}</div>
                 </div>
                 {/each}
+                {/if}
             </div>
             <div class="sliderGroup">
-                <h3>Global Controls</h3>
+                <button on:click={st.showGlobal = !st.showGlobal} class="controlBtn"><h3>Global Controls</h3></button>
+                {#if st.showGlobal}
                 <div class="sliderWrapper"> 
                     <input type="number" bind:value={st.amplitude} class="sliderText" min="0" max="1" step="0.01">
                     <br>
@@ -451,6 +459,7 @@ s > 0 ? 1 : -1;`,
                     <input bind:value={st.gridSize} type="range" min="1" max="16">
                     <div class="tag">grid size</div>
                 </div>
+                <br>
                 <div class="sliderWrapper"> 
                     <div class="tag">show</div>
                     <input type=checkbox bind:checked={st.showRefSine}>
@@ -461,6 +470,7 @@ s > 0 ? 1 : -1;`,
                     <input type=checkbox bind:checked={st.showGrid}>
                     <div class="tag">grid</div>
                 </div>
+                {/if}
             </div>
             <br><br>
         </div>
