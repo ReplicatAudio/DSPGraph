@@ -5,6 +5,7 @@ import clipping from './clipping.json';
 import tanTri from './tanTri.json';
 import saw from './saw.json';
 import pwm from './pwm.json';
+import param from './param.json';
 import waveTable1 from './wavetable1.json';
 import waveTable2 from './wavetable2.json';
 import buffer from './buffer.json';
@@ -17,6 +18,7 @@ export const examples = {
     'Tan Triangle': tanTri,
     'Sawtooth': saw,
     'Pulse Width': pwm,
+    'Parameters': param,
     'Wavetable 1': waveTable1,
     'Wavetable 2': waveTable2,
     'Buffer': buffer,
