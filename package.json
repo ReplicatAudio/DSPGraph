@@ -23,6 +23,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/adapter-static": "^1.0.0-next.49",
 		"svelte-canvas": "^0.7.1"
 	}
 }
