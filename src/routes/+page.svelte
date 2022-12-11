@@ -4,6 +4,7 @@
     import Plot from "./plot.svelte";
     import { stLS } from "./store.js";
     import {examples} from "../examples";
+    import defaultJS from './default';
     const cfg = {
         maxWaves: 4,
         paramCount: 8
@@ -29,15 +30,7 @@
         showParams: false,
         showGlobal:false,
         fileName: "MyDSP",
-        userJS: `// Write your JS code here
-// x -> graph x
-// s -> sine (Math.sin(x))
-// p[index] -> param controls (sliders)
-// graph shows last expression 
-// or value of 'w[index]'
-
-// Make a square wave
-s > 0 ? 1 : -1;`,
+        userJS: defaultJS,
     };
     // Create a deep copy of the st object for restoring
     const stb = JSON.parse(JSON.stringify(st));
