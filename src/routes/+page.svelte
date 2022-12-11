@@ -1,10 +1,14 @@
 <script>
     import { onMount } from 'svelte'
-    import Clipboard from "svelte-clipboard";
     import Plot from "./plot.svelte";
     import { stLS } from "./store.js";
     import {examples} from "../examples";
     import defaultJS from './default';
+	import ModalApp from './modalApp.svelte';
+	import ModalExamples from './modalExamples.svelte';
+	import ModalLoad from './modalLoad.svelte';
+	import ModalHelp from './modalHelp.svelte';
+	import ModalSave from './modalSave.svelte';
     const cfg = {
         maxWaves: 4,
         paramCount: 8
@@ -180,46 +184,19 @@
         <button class="modalCloseBtn" on:click={closeModal}>x</button>
         <h3>{ast.modal.type.toUpperCase()}</h3>
         {#if ast.modal.type === "app"}
-        <center>
-            DSPGraphJS
-            <br>
-            © Mathieu Dombrock 2022
-            <br>
-            <button on:click={ast.useAce = !ast.useAce}>Disable Ace</button>
-            <a href="https://replicataudio.com" target="_blank" rel="noreferrer"><button>ReplicatAudio</button></a>
-            <a href="https://github.com/ReplicatAudio" target="_blank" rel="noreferrer"><button>Source Code</button></a>
-        </center>
+        <ModalApp ast={ast} />
         {/if}
         {#if ast.modal.type === "examples"}
-        <center>
-            <br>
-            {#each Object.entries(examples) as [key, val]}
-            <button on:click={()=>{loadExample(val)}} class="loadItem">{key}</button>
-            {/each}
-        </center>
+        <ModalExamples examples={examples} loadExample={loadExample} />
         {/if}
         {#if ast.modal.type === "help"}
-            <pre>HELP</pre>
+        <ModalHelp />
         {/if}
         {#if ast.modal.type === "save"}
-        <br>
-        <input bind:value={st.fileName} type="text" id="fileName">
-        <button on:click={downloadFile}>save to file</button>
-        <button on:click={saveToLS}>save to browser</button>
-        <Clipboard
-            text={JSON.stringify(st, null, 2)}
-            let:copy
-            on:copy={() => {
-                alert('Has Copied to Clipboard👏');
-            }}>
-            <button on:click={copy}>save to clipboard</button>
-        </Clipboard>
+        <ModalSave st={st} downloadFile={downloadFile} saveToLS={saveToLS} />
         {/if}
         {#if ast.modal.type === "load"}
-        <br>
-        <input style="display:none" type="file" accept=".dsp.json" on:change={(e)=>loadFile(e)} bind:this={ast.fileinput} >
-        <button on:click={()=>{ast.fileinput.click()}}>load from file</button>
-        <button on:click={loadFromLS}>load from browser</button>
+        <ModalLoad loadFile={loadFile} loadFromLS={loadFromLS} ast={ast} />
         {/if}
     </div>
     {/if}
