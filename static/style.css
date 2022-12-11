@@ -57,6 +57,9 @@ button:hover{
     background:var(--bgSub);
     color:var(--textHighlight);
 }
+.hidden{
+    display:none;
+}
 .headerImg{
     background:var(--bgSub2);
     position:fixed;
@@ -96,13 +99,21 @@ button:hover{
     overflow-y: scroll;
 }
 .codeArea{
-    background:var(--bgSub);
-    position:absolute;
+    background:rgb(40,42,53);
+    position:fixed;
     top:0;
     left:0;
+    bottom:0;
     width:45vw;
-    height:100vh;
-    overflow: scroll;
+    /* height:100vh; */
+    /* overflow: scroll; */
+}
+#editor { 
+    position: absolute;
+    top: 64px;
+    right: 0;
+    bottom:0;
+    left: 0;
 }
 .codeArea textarea{
     position:fixed;
@@ -118,7 +129,7 @@ button:hover{
 .errMsg{
     position:fixed;
     bottom:0;
-    z-index:2;
+    z-index:999;
     font-family: 'Consolas', monospace;
     background:var(--warning);
     color:var(--textLight);
@@ -172,10 +183,10 @@ button:hover{
 .modal{
     position:absolute;
     z-index: 999999;
-    top:20rem;
-    left:32rem;
-    width:calc(100vw - 64rem);
-    height: calc(100vh - 40rem);
+    top:10vh;
+    left:32vw;
+    width:calc(100vw - 64vw);
+    min-height: calc(100vh - 40vh);
     background:var(--bg2);
     padding:1rem;
 }

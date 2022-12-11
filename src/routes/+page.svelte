@@ -1,4 +1,43 @@
 <script>
+    import { onMount } from 'svelte'
+	
+	onMount(async () => {
+        ace.config.set('basePath', 'https://cdn.jsdelivr.net/npm/ace-builds@1.13.2/src-noconflict/');
+        ast.editor = ace.edit("editor");
+        // ace.edit(editor, {
+        //     mode: "ace/mode/javascript",
+        //     selectionStyle: "text"
+        // });
+        //ast.editor.setTheme("ace/theme/dracula");
+        ast.editor.setTheme("ace/theme/one_dark");
+        //editor.resize();
+        //editor.setTheme("ace/theme/solarized");
+        ast.editor.session.setMode("ace/mode/javascript");
+        ast.editor.setOptions({
+            selectionStyle: "text",
+            //autoScrollEditorIntoView: true,
+            //copyWithEmptySelection: true,
+            //animatedScroll: false,
+            //showPrintMargin: false,
+            //scrollPastEnd: false,
+            //minLines: 10,
+            //dragEnabled: false,
+            //hScrollBarAlwaysVisible: true,
+            //vScrollBarAlwaysVisible: true,
+        });
+        ast.editor.setValue(st.userJS);
+        setInterval(function(){
+            if(ast.useAce)
+            {
+                st.userJS = ast.editor.getValue();
+            }
+        }, 333);
+	})
+    
+    function resizeEditor()
+    {
+        editor.resize();
+    }
     import Clipboard from "svelte-clipboard";
     import { stLS } from "./store.js";
     import {examples} from "../examples";
@@ -12,6 +51,8 @@
             type: 'none',
         },
         fileinput: undefined,
+        editor: undefined,
+        useAce: true,
     };
     let st = {
         paramVals: [],
@@ -39,6 +80,7 @@ s > 0 ? 1 : -1;`,
         if(confirm("Reset all code and paramters?"))
         {
             st = JSON.parse(JSON.stringify(stb));
+            ast.editor.setValue(st.userJS);
             setup(true);
         }
     }
@@ -57,6 +99,7 @@ s > 0 ? 1 : -1;`,
         if($stLS.periods)
         {
             st = JSON.parse(JSON.stringify($stLS));
+            ast.editor.setValue(st.userJS);
             //if(showAlert){alert('loaded!');};
         }
         else{
@@ -74,6 +117,7 @@ s > 0 ? 1 : -1;`,
     function loadExample(json)
     {
         st = JSON.parse(JSON.stringify(json));
+        ast.editor.setValue(st.userJS);
         closeModal();
     }
     function downloadFile()
@@ -110,14 +154,14 @@ s > 0 ? 1 : -1;`,
         reader.onload = e => {
             try{
                 st = JSON.parse(e.target.result);
+                ast.editor.setValue(st.userJS);
                 alert('Loaded!');
+                closeModal();
             }    
             catch(err){
                 console.log(err);
                 alert('Could not load that file!');
             }
-            
-
         };
     }
     function setup(skipLS=false){
@@ -127,6 +171,7 @@ s > 0 ? 1 : -1;`,
         // {
         //     loadFromLS(false);
         // }
+        
     }
     setup();
 
@@ -236,9 +281,10 @@ s > 0 ? 1 : -1;`,
                 }
             }
             const strokeStyles = [
+                "rgb(200,255,255",
                 "rgb(255,200,255)",
                 "rgb(255,255,200)",
-                "rgb(200,255,255",
+                
                 "rgb(255,255,255)",
 
                 "rgb(255,200,255)",
@@ -277,7 +323,9 @@ s > 0 ? 1 : -1;`,
         }
     };
 </script>
-
+<svelte:head>
+	<script src="https://cdn.jsdelivr.net/npm/ace-builds@1.13.2/src-noconflict/ace.min.js" on:load={setup}></script>
+</svelte:head>
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -285,6 +333,7 @@ s > 0 ? 1 : -1;`,
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ReplicatAudio DSP Tool</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/ace-builds@1.13.2/src-noconflict/ace.min.js"></script>
   </head>
   <body>
     {#if ast.modal.show}
@@ -305,6 +354,7 @@ s > 0 ? 1 : -1;`,
                 }}>
                 <button on:click={copy}>Copy State</button>
             </Clipboard>
+            <button on:click={ast.useAce = !ast.useAce}>Disable Ace</button>
             <a href="https://replicataudio.com" target="_blank" rel="noreferrer"><button>ReplicatAudio</button></a>
             <a href="https://github.com/ReplicatAudio" target="_blank" rel="noreferrer"><button>Source Code</button></a>
         </center>
@@ -352,7 +402,9 @@ s > 0 ? 1 : -1;`,
             See the JS Console for more info.
         </div>
         {/if}
-        <textarea bind:value={st.userJS} id="userJS" spellcheck="false"></textarea>
+        <textarea bind:value={st.userJS} id="userJS" spellcheck="false" class:hidden={ast.useAce}></textarea>
+        <div id="editor" bind:this={ast.editor} on:click={resizeEditor} class:hidden={!ast.useAce}>Loading Editor...</div>
+        
     </div>
     <div class="plotArea">
         <div class="headerImg">
@@ -364,6 +416,7 @@ s > 0 ? 1 : -1;`,
         <Canvas width={640} height={320}>
             <Layer {render} />
         </Canvas>
+        <br>
         <div class="scrollArea">
             <div class="sliderGroup">
                 <h3>Parameter Controls</h3>
