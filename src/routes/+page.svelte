@@ -234,7 +234,7 @@
     <div class="plotArea">
         <div class="headerImg">
             <a href="https://replicataudio.com" target="_blank" rel="noreferrer">
-                <img src="/ra_logo.png" alt="ReplicatAudio Logo">
+                <img src="ra_logo.png" alt="ReplicatAudio Logo">
             </a>
         </div>
         <br>
