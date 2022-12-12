@@ -10,6 +10,7 @@ import waveTable2 from './wavetable2.json';
 import buffer from './buffer.json';
 import noise from './noise.json';
 import globals from './globals.json';
+import filter from './filter.json';
 
 export const examples = {
     'Square': square,
@@ -23,5 +24,6 @@ export const examples = {
     'Wavetable 1': waveTable1,
     'Wavetable 2': waveTable2,
     'Buffer': buffer,
-    'Globals': globals
+    'Globals': globals,
+    'Filter': filter
 }

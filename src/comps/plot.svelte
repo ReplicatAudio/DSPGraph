@@ -28,6 +28,7 @@
             const sign = Math.sign;
             const random = Math.random;
             const noise = ()=>{return (Math.random()*2)-1};
+            const sampleRate = 640;
 
             const xr = x/pi2;
 

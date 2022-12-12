@@ -1,0 +1,22 @@
+{
+    "paramVals": [
+      0.75,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "periods": 2,
+    "amplitude": 1,
+    "errStr": "",
+    "hasErr": false,
+    "showRefSine": true,
+    "userJS": "/*\n\nFilter Example:\n---\nA simple first order LP filter applied to a perfect square wave\n\n*/\n\n// Define a first order lowpass filter\nfunction lowpass(sample, cutoffFrequency) {\n    // Calculate the Nyquist frequency, which is half the sample rate\n    // of the waveform.\n    // `sampleRate` is a global constant\n    const nyquistFrequency = 0.5 * sampleRate;\n    \n    // Create a new array for the filtered waveform.\n    let filtered = 0;\n    \n    // Use a first-order lowpass filter to smooth out the square wave.\n    // Skip the first sample, since we don't have a previous sample\n    // to use in the filtering process.\n    if (x > 0) {\n        // Calculate the cutoff frequency as a fraction of the Nyquist\n        // frequency.\n        const f = cutoffFrequency / nyquistFrequency;\n        \n        // Apply the lowpass filter to the current sample.\n        const lastSample = g[0];\n        filtered = lastSample + f * (sample - lastSample);\n    } \n    else {\n        // For the first sample, just copy the original value.\n        filtered = sample;\n    }\n    // Cache the current filtered value\n    g[0] = filtered;\n    \n    return filtered;\n}\n// Create an unfiltered square wave\nconst squareWave = sign(s);\n\n// Define Cutoff\nconst cutoff = p[0]*(sampleRate/2);\n\n// Filter the square wave\nlowpass(squareWave, cutoff);\n",
+    "showGrid": true,
+    "gridSize": 4,
+    "showGlobal": false,
+    "showParams": true
+  }
