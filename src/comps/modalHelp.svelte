@@ -6,17 +6,19 @@ s -> periodic sine wave (Math.sin(x))`;
     const mathHelpers = `pi -> Math.PI
 pi2 -> Math.PI * 2
 halfPi -> Math.PI / 2
-sin() -> Math.sin()
-cos() -> Math.cos()
-abs() -> Math.abs()
-tan() -> Math.tan()
-tanh() -> Math.tanh()
-round() -> Math.round()
-floor() -> Math.floor()
-ceil() -> Math.ceil()
-sign() -> Math.sign()
+sin(n) -> Math.sin(n)
+cos(n) -> Math.cos(n)
+abs(n) -> Math.abs(n)
+tan(n) -> Math.tan(n)
+tanh(n) -> Math.tanh(n)
+round(n) -> Math.round(n)
+floor(n) -> Math.floor(n)
+ceil(n) -> Math.ceil(n)
+sign(n) -> Math.sign(n)
 random() -> Math.random()
 noise() -> (Math.random() * 2) - 1`;
+    const globals = `makeGlobalNum(i) -> forces the global variable to be a number
+mareGlobalArr(i) -> forces the global variable to be an array`;
 </script>
 
 <div>
@@ -33,5 +35,10 @@ noise() -> (Math.random() * 2) - 1`;
         <pre>{output}</pre>
         <h4>Math Helpers</h4>
         <pre>{mathHelpers}</pre>
+        <h4>Globals</h4>
+        Globals allow you to store data outside the scope of your loop.
+        <br>
+        By default, all global variables are arrays. Which is useful for dealing with buffers.
+        <pre>{globals}</pre>
     </div>
 </div>

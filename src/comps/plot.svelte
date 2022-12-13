@@ -30,6 +30,17 @@
             const noise = ()=>{return (Math.random()*2)-1};
             const sampleRate = 640;
 
+            const makeGlobalNum = function(i){
+                // If g[i] is a number then do nothing
+                // If not make it 0
+                g[i] = typeof g[i] == "number" ? g[i] : 0; 
+            }
+            const makeGlobalArr = function(i){
+                // If g[i] is an array then do nothing
+                // If not make it an empty array
+                g[i] = typeof g[i] == "object" ? g[i] : []; 
+            }
+
             const xr = x/pi2;
 
             const we = eval(js);
