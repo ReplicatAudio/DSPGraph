@@ -126,7 +126,7 @@ button:hover{
     background:var(--bg);
 }
 .scrollArea{
-    max-height:calc(100vh - 384px);
+    max-height:calc(100vh - 420px);
     overflow-y: scroll;
 }
 .codeArea{
@@ -173,7 +173,8 @@ button:hover{
     top:0;
     right:0;
     width:55vw;
-    height:100vh;
+    bottom:0;
+    /* height:100vh; */
     text-align: center;
 }
 .sliderGroup{
@@ -209,8 +210,10 @@ button:hover{
     z-index: 999998;
     top:0;
     left:0;
-    width:100vw;
-    height: 100vh;
+    bottom:0;
+    right:0;
+    /* width:100vw; */
+    /* height: 100vh; */
     background:rgba(0,0,0,0.75);
     cursor:pointer;
 }
