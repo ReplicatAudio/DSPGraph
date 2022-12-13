@@ -12,6 +12,7 @@ import noise from './noise.json';
 import globals from './globals.json';
 import filter from './filter.json';
 import fourierSeries from './fourierSeries.json';
+import mix from './mix.json';
 
 export const examples = {
     'Square': square,
@@ -21,6 +22,7 @@ export const examples = {
     'Pulse Width': pwm,
     'Parameters': param,
     'Noise': noise,
+    'Mix': mix,
     'Traditional X': tradX,
     'Wavetable 1': waveTable1,
     'Wavetable 2': waveTable2,

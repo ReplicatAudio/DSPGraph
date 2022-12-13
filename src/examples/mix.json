@@ -1,0 +1,23 @@
+{
+    "paramVals": [
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "periods": 2,
+    "amplitude": 1,
+    "errStr": "",
+    "hasErr": false,
+    "showRefSine": true,
+    "showGrid": true,
+    "gridSize": 4,
+    "showParams": true,
+    "showGlobal": false,
+    "fileName": "MyDSP",
+    "userJS": "/*\n\nMix Example:\n---\nMix / cross-fade between 2 waveforms\n\n*/\n// Control the mix with p[0]\nconst m = p[0];\n\nconst a = s;\nconst b = -sign(s);\n\nw[0]=(a*m)-(b*(1-m));\n"
+  }
