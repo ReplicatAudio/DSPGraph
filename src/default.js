@@ -5,6 +5,6 @@ export default `// Write your JS code here
 // graph shows last expression 
 // or value of 'w[index]'
 
-// Make a square wave
+// Make a perfect square wave (with infinite bandwidth)
 s > 0 ? 1 : -1;
 `;
