@@ -11,6 +11,7 @@ import buffer from './buffer.json';
 import noise from './noise.json';
 import globals from './globals.json';
 import filter from './filter.json';
+import fourierSeries from './fourierSeries.json';
 
 export const examples = {
     'Square': square,
@@ -25,5 +26,6 @@ export const examples = {
     'Wavetable 2': waveTable2,
     'Buffer': buffer,
     'Globals': globals,
-    'Filter': filter
+    'Filter': filter,
+    'Fourier Series': fourierSeries
 }
