@@ -1,7 +1,7 @@
 # DSPGraph
 A web based tool for plotting with DSP algorithms written in JavaScript.
 
-![screenshot](/screenshots/dspgraph.png)
+![screenshot](https://replicataudio.com/img/dspgraph/fsBig.gif)
 
 [Check it out](https://replicataudio.com/dsptool/)
 
