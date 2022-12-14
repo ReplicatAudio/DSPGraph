@@ -3,7 +3,7 @@ A web based tool for plotting with DSP algorithms written in JavaScript.
 
 ![screenshot](https://replicataudio.com/img/dspgraph/fsBig.gif)
 
-[Check it out](https://replicataudio.com/dsptool/)
+[Check it out](https://replicataudio.com/lab/dspgraph/app)
 
 DSP Graph is a web based tool that allows users to write and run JavaScript code directly in their web browser.
 
