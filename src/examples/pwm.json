@@ -14,7 +14,7 @@
   "errStr": "",
   "hasErr": false,
   "showRefSine": true,
-  "userJS": "/*\n\nPWM Example\n---\nControl the duty cycle with p[0]\n\n*/\n\nconst duty = (p[0]*2)-1;\ns > duty ? 1 : -1;",
+  "userJS": "/*\n\nPWM Example\n---\nControl the duty cycle with p[0]\n\nNote that this is a \"perfect square\" which contains infinite harmonics. \nIt is not suitable for real world applications. \n\n*/\n\n// Control the duty cycle with paramter 0\nconst duty = (p[0]*2)-1;\ns > duty ? 1 : -1;",
   "showGrid": true,
   "gridSize": 4,
   "showParams": true

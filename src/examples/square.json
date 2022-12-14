@@ -14,8 +14,10 @@
   "errStr": "",
   "hasErr": false,
   "showRefSine": true,
-  "userJS": "/*\n\nSquare Example:\n---\nWe can easily make a square wave by checking if a sine wave is above or below zero.\n\n*/\n\ns > 0 ? 1 : -1\n",
   "showGrid": true,
+  "gridSize": 4,
+  "showParams": true,
   "showGlobal": false,
-  "gridSize": 4
+  "fileName": "MyDSP",
+  "userJS": "/*\n\nSquare Example:\n---\nWe can easily make a square wave by checking if \na sine wave is above or below zero.\n\nNote that this is a \"perfect square\" which means\nit is not suitable for real world applications.\n\n*/\n\ns > 0 ? 1 : -1\n"
 }

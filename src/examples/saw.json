@@ -14,7 +14,7 @@
   "errStr": "",
   "hasErr": false,
   "showRefSine": true,
-  "userJS": "/*\n\nSaw Example:\n---\nA simple saw wave\n\n*/\n\nlet saw = (x % pi2);\nsaw = saw * 2;\nsaw = (saw / pi2)-1;\n\n// Uncomment to reverse the saw\n//-saw\n",
+  "userJS": "/*\n\nSaw Example:\n---\nA simple saw wave. \n\nNote that this is a \"perfect saw\" which contains infinite bandwidth\nIt is not suitable for real world applications. \n\n*/\n\nlet saw = (x % pi2);\nsaw = saw * 2;\nsaw = (saw / pi2)-1;\n\n// Uncomment to reverse the saw\n//-saw\n",
   "showGrid": true,
   "gridSize": 4,
   "showGlobal": false
