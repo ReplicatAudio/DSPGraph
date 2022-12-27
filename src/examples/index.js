@@ -13,6 +13,7 @@ import globals from './globals.json';
 import filter from './filter.json';
 import fourierSeries from './fourierSeries.json';
 import mix from './mix.json';
+import dcFilterHP from './dcFilterHP.json';
 
 export const examples = {
     'Square': square,
@@ -29,5 +30,6 @@ export const examples = {
     'Buffer': buffer,
     'Globals': globals,
     'Filter': filter,
-    'Fourier Series': fourierSeries
+    'Fourier Series': fourierSeries,
+    'DC Filter (HP)': dcFilterHP,
 }

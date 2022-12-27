@@ -1,0 +1,23 @@
+{
+    "paramVals": [
+      0,
+      0.99,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5,
+      0.5
+    ],
+    "periods": 4,
+    "amplitude": 1,
+    "errStr": "",
+    "hasErr": false,
+    "showRefSine": true,
+    "showGrid": true,
+    "gridSize": 4,
+    "showParams": true,
+    "showGlobal": false,
+    "fileName": "MyDSP",
+    "userJS": "/*\n\nDC Filter (HP) Example:\n---\nWe can use a highpass filter to act as a DC filter\n*/\n\n// Define the filter function\nfunction dcFilter(input, previousInput, previousOutput, alpha) {\n  // Compute the filtered output\n  let output = alpha * (previousOutput + input - previousInput);\n\n  // Return the filtered output\n  return output;\n}\n\n// This technique relies on caching the last input and output\n// Previous input = g[0]\n// Previous output = g[1]\n\n// Setup our DC bias based on the p[0] control\nconst B = (p[0]*2)-1;\n\n// Setup our signal\nconst s1 = s + B;\n\n// Filter out signal and show the blue wave\nw[0] = dcFilter(s1,g[0],g[1],p[1]);\n// Cache our old values\ng[0] = s1;\ng[1] = w[0];\n\n// Show the original offset waveform as the purple wave (demo only)\nw[1] = s1;\n"
+  }
