@@ -1,22 +1,22 @@
 {
-    "paramVals": [
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5,
-      0.5
-    ],
-    "periods": 2,
-    "amplitude": 1,
-    "errStr": "",
-    "hasErr": false,
-    "showRefSine": true,
-    "userJS": "/*\n\nFourier Series Example:\n---\n\nThis code defines a function fourierSquareWave that \nuses the Fourier series to approximate a square wave. \nThe function takes a single argument x, which represents \nthe position in the wave. The number of harmonics used in \nthe approximation is determined by the value of numHarmonics, \nwhich is calculated based on p[0] (parameter 0)\nThe for loop then iterates over odd values of n starting from 1, \nand at each step it calculates the nth harmonic of the \nsquare wave and adds it to the sum. Finally, \nthe sum is returned as the result of the function.\n\n*/\n\n// Define number of harmonics\nconst numHarmonics = floor(p[0]*30)+2\n\n// Define the function that generates the wave form\nfunction fourierSquareWave(x) {\n  let sum = 0;\n  for (let n = 1; n < numHarmonics; n += 2) {\n    sum += 1 / n * Math.sin(n * x);\n  }\n  return sum;\n}\n\n// Sample from the wave form function\nfourierSquareWave(x);\n",
-    "showGrid": true,
-    "showGlobal": false,
-    "gridSize": 4,
-    "showParams": true
-  }
+  "paramVals": [
+    1,
+    0,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+  ],
+  "periods": 2,
+  "amplitude": 1,
+  "errStr": "",
+  "hasErr": false,
+  "showRefSine": true,
+  "userJS": "/*\n\nFourier Series Example:\n---\n\nThis code defines a function fourierSquareWave that \nuses the Fourier series to approximate a square wave. \nThe function takes a single argument x, which represents \nthe position in the wave. The number of harmonics used in \nthe approximation is determined by the value of numHarmonics, \nwhich is calculated based on p[0] (parameter 0)\nThe for loop then iterates over odd values of n starting from 1, \nand at each step it calculates the nth harmonic of the \nsquare wave and adds it to the sum. Finally, \nthe sum is returned as the result of the function.\n\n*/\n\n// Define number of harmonics\nconst numHarmonics = floor(p[0]*30)+2\n\n// Define the function that generates the wave form\nfunction fourierSquareWave(ca) {\n    let sum = 0;\n    for (let n = 1; n < numHarmonics; n += 2) {\n        sum += 1 / n * sin(n * ca);\n    }\n    return sum;\n}\n\n// Sample from the wave form function\nfourierSquareWave(x);\n",
+  "showGrid": true,
+  "showGlobal": false,
+  "gridSize": 4,
+  "showParams": true
+}
