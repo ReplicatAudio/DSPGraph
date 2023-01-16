@@ -1,0 +1,23 @@
+{
+  "paramVals": [
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5,
+    0.5
+  ],
+  "periods": 2,
+  "amplitude": 1,
+  "errStr": "",
+  "hasErr": false,
+  "showRefSine": true,
+  "showGrid": true,
+  "gridSize": 4,
+  "showParams": true,
+  "showGlobal": false,
+  "fileName": "MyDSP",
+  "userJS": "/*\n\nTriangle Example:\n---\nThis code defines a function called `triangle`. \n\nThe function takes a single parameter called \ncurrentAngle which is the current position of the wave in radians. \n\nIt then uses the abs function to calculate the amplitude of the wave at that angle. \nIt first calculates the value of:\n\n2 * (currentAngle / pi) - 2 \n\n*/\n\n// Define the triangle function\nfunction triangle(currentAngle){\n    // Compensate for phase offset\n    currentAngle += halfPi;\n    // Wrap current angle around pi2\n    // So we get multiple periods\n    currentAngle = currentAngle % pi2;\n    // Return the traingle sample\n    return 1 - abs(2 * (currentAngle / pi) - 2);\n}\n\ntriangle(x);\n"
+}

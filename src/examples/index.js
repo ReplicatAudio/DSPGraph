@@ -14,10 +14,12 @@ import filter from './filter.json';
 import fourierSeries from './fourierSeries.json';
 import mix from './mix.json';
 import dcFilterHP from './dcFilterHP.json';
+import triangle from './triangle.json';
 
 export const examples = {
     'Square': square,
     'Clipping': clipping,
+    'Triangle': triangle,
     'Tan Triangle': tanTri,
     'Sawtooth': saw,
     'Pulse Width': pwm,
